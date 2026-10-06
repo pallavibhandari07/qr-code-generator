@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QR Link Generator</title>
+  <meta name="description" content="Turn any link into a scannable QR code." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <header class="card__header">
+      <h1>QR Link Generator</h1>
+      <p class="subtitle">Turn any link into a scannable QR code.</p>
+    </header>
+
+    <!-- Input section: one field, one button. -->
+    <form id="qr-form" class="form" novalidate>
+      <label class="sr-only" for="url-input">Link</label>
+      <div class="form__row">
+        <input
+          id="url-input"
+          name="url"
+          type="text"
+          inputmode="url"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="Enter your link here..."
+          aria-describedby="error-message"
+        />
+        <button id="generate-btn" type="submit" class="btn btn--primary">Generate QR</button>
+      </div>
+
+      <!-- Validation errors appear here. -->
+      <div id="error-message" class="error" role="alert" hidden>
+        <span id="error-text"></span>
+        <button id="suggestion-btn" type="button" class="link-btn" hidden></button>
+      </div>
+    </form>
+
+    <!-- Preview section: placeholder first, result after a successful generation. -->
+    <section class="preview" aria-live="polite">
+      <div id="placeholder" class="placeholder">
+        <svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round">
+          <rect x="8" y="8" width="18" height="18" rx="2" />
+          <rect x="38" y="8" width="18" height="18" rx="2" />
+          <rect x="8" y="38" width="18" height="18" rx="2" />
+          <path d="M38 38h6v6h-6zM50 38h6v6h-6zM44 50h6v6h-6zM38 56v-6" stroke-linecap="round" />
+        </svg>
+        <p>Your QR code will appear here.</p>
+      </div>
+
+      <div id="result" class="result" hidden>
+        <div class="qr-frame">
+          <canvas id="qr-canvas" role="img" aria-label="Generated QR code"></canvas>
+        </div>
+
+        <p class="encoded-label">Encoded link</p>
+        <p id="encoded-url" class="encoded-url"></p>
+
+        <div class="actions">
+          <button id="download-btn" type="button" class="btn btn--primary">Download QR</button>
+          <button id="reset-btn" type="button" class="btn btn--ghost">Generate New QR</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="qr.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
